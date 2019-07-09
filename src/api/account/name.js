@@ -1,4 +1,4 @@
-const api = require('../../api');
+const api = require("../../api");
 
 module.exports = (req, res) => {
   if (!req.query.token) {
