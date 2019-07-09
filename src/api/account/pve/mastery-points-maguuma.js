@@ -1,4 +1,4 @@
-const api = require("../../../../api");
+const api = require("../../../api");
 
 module.exports = (req, res) => {
   if (!req.query.token) {
@@ -13,11 +13,11 @@ module.exports = (req, res) => {
     .get()
     .then(masteries => {
       const total = masteries.totals.reduce((total, region) => {
-        return region.region !== "Desert" ? total : total += region.spent;
+        return region.region !== "Maguuma" ? total : total += region.spent;
       }, 0);
       res.end(total.toString());
     })
     .catch(error => {
-      res.end("Couldn't load the PoF mastery points.");
+      res.end("Couldn't load the HoT mastery points.");
     });
 };
