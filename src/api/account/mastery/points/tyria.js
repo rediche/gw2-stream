@@ -12,12 +12,12 @@ module.exports = (req, res) => {
     .points()
     .get()
     .then(masteries => {
-      const tyria = masteries.totals.reduce((total, region) => {
-        return region.region !== "Tyria" ? total : (total += region.spent);
+      const total = masteries.totals.reduce((total, region) => {
+        return region.region !== "Tyria" ? total : total += region.spent;
       }, 0);
-      res.end(tyria.toString());
+      res.end(total.toString());
     })
     .catch(error => {
-      res.end("Couldn't load the total mastery points.");
+      res.end("Couldn't load the core mastery points.");
     });
 };
