@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "name": "gw2-stream",
+  "builds": [
+    { "src": "api/**/*.js", "use": "@now/node" }
+  ]
+}
