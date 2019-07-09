@@ -1,13 +1,11 @@
-const client = require("gw2api-client");
-const cacheMemory = require("gw2api-client/src/cache/memory");
+const api = require('../../api');
 
 module.exports = (req, res) => {
   if (!req.query.token) {
     res.end("No API token provided.");
   }
 
-  client()
-    .cacheStorage(cacheMemory())
+  api
     .authenticate(req.query.token)
     .account()
     .get()
