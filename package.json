@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/rediche/gw2-stream/issues"
   },
-  "homepage": "https://github.com/rediche/gw2-stream#readme"
+  "homepage": "https://github.com/rediche/gw2-stream#readme",
+  "dependencies": {
+    "gw2api-client": "^7.4.1"
+  }
 }
