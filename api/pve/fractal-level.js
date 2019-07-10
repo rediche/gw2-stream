@@ -1,4 +1,4 @@
-const api = require("../../api");
+const api = require("../../helpers/api");
 
 module.exports = (req, res) => {
   if (!req.query.token) {
@@ -10,9 +10,9 @@ module.exports = (req, res) => {
     .account()
     .get()
     .then(account => {
-      res.end(account.name);
+      res.end(account.fractal_level.toString());
     })
     .catch(error => {
-      res.end("Couldn't load the account name.");
+      res.end("Couldn't load the fractal level.");
     });
 };
