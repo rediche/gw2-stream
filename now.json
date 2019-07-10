@@ -15,12 +15,12 @@
     { 
       "src": "/command/(.*)-(.*)/(.*)",
       "dest": "/src/api/$1/$2.js?token=$3",
-      "headers": { "Content-Type": "plain/text" }
+      "headers": { "Content-Type": "text/plain" }
     },
     {
       "src": "/(.*)",
       "dest": "/src/api/$1.js",
-      "headers": { "Content-Type": "plain/text" }
+      "headers": { "Content-Type": "text/plain" }
     }
   ]
 }
