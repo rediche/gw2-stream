@@ -22,7 +22,7 @@ router.get('/account/mastery/points/tyria', masteryPoints.tyria);
 router.get('/account/mastery/points/maguuma', masteryPoints.maguuma);
 router.get('/account/mastery/points/desert', masteryPoints.desert);
 
-// Currencies
+// Wallet
 router.get('/account/wallet/gold', wallet.gold);
 router.get('/account/wallet/karma', wallet.karma);
 router.get('/account/wallet/laurels', wallet.laurels);
