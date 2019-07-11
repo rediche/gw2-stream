@@ -1,20 +1,25 @@
 const api = require("../../helpers/api");
 const convertToCoinString = require("../../helpers/coins");
 
-const searchWallet = (currencyId) => (currency) => {
-  return currency.id === currencyId
+const searchWallet = currencyId => currency => {
+  return currency.id === currencyId;
 };
 
-exports.gold = (req, res) => {
-  api
-    .authenticate(req.query.token)
+const getCurrencyInWallet = (currencyId, token) => {
+  return api
+    .authenticate(token)
     .account()
     .wallet()
     .get()
     .then(wallet => {
-      const currency = wallet.find(searchWallet(1));
-      const coinString = convertToCoinString(currency.value);
-      res.end(coinString);
+      return wallet.find(searchWallet(currencyId)).value;
+    });
+};
+
+exports.gold = (req, res) => {
+  getCurrencyInWallet(1, req.query.token)
+    .then(currency => {
+      res.end(convertToCoinString(currency));
     })
     .catch(error => {
       res.end("Couldn't load the account's gold.");
@@ -22,46 +27,31 @@ exports.gold = (req, res) => {
 };
 
 exports.karma = (req, res) => {
-  api
-    .authenticate(req.query.token)
-    .account()
-    .wallet()
-    .get()
-    .then(wallet => {
-      const currency = wallet.find(searchWallet(2));
-      res.end(currency.value.toLocaleString());
+  getCurrencyInWallet(2, req.query.token)
+    .then(currency => {
+      res.end(currency.toLocaleString());
     })
     .catch(error => {
-      res.end("Couldn't load the account's gold.");
+      res.end("Couldn't load the account's karma.");
     });
 };
 
 exports.laurels = (req, res) => {
-  api
-    .authenticate(req.query.token)
-    .account()
-    .wallet()
-    .get()
-    .then(wallet => {
-      const currency = wallet.find(searchWallet(3));
-      res.end(currency.value.toLocaleString());
+  getCurrencyInWallet(3, req.query.token)
+    .then(currency => {
+      res.end(currency.toLocaleString());
     })
     .catch(error => {
-      res.end("Couldn't load the account's gold.");
+      res.end("Couldn't load the account's laurels.");
     });
 };
 
 exports.gems = (req, res) => {
-  api
-    .authenticate(req.query.token)
-    .account()
-    .wallet()
-    .get()
-    .then(wallet => {
-      const currency = wallet.find(searchWallet(4));
-      res.end(currency.value.toLocaleString());
+  getCurrencyInWallet(4, req.query.token)
+    .then(currency => {
+      res.end(currency.toLocaleString());
     })
     .catch(error => {
-      res.end("Couldn't load the account's gold.");
+      res.end("Couldn't load the account's gems.");
     });
 };
