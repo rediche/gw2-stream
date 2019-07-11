@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 router.get('/account/name', account.name);
 router.get('/account/server', account.server);
 router.get('/account/fractal-level', account.fractalLevel);
+router.get('/account/wvw-rank', account.wvwRank);
 
 // Mastery Points
 router.get('/account/mastery/points', masteryPoints.total);

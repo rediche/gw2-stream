@@ -37,3 +37,16 @@ exports.fractalLevel = (req, res) => {
       res.end("Couldn't load the fractal level.");
     });
 };
+
+exports.wvwRank = (req, res) => {
+  api
+    .authenticate(req.query.token)
+    .account()
+    .get()
+    .then(account => {
+      res.end(account.wvw_rank.toLocaleString());
+    })
+    .catch(error => {
+      res.end("Couldn't load the WvW rank.");
+    });
+};
