@@ -35,3 +35,18 @@ exports.karma = (req, res) => {
       res.end("Couldn't load the account's gold.");
     });
 };
+
+exports.laurels = (req, res) => {
+  api
+    .authenticate(req.query.token)
+    .account()
+    .wallet()
+    .get()
+    .then(wallet => {
+      const currency = wallet.find(searchWallet(3));
+      res.end(currency.value.toLocaleString());
+    })
+    .catch(error => {
+      res.end("Couldn't load the account's gold.");
+    });
+};
