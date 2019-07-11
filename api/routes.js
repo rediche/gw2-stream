@@ -24,6 +24,7 @@ router.get('/account/mastery/points/desert', masteryPoints.desert);
 
 // Currencies
 router.get('/account/wallet/gold', wallet.gold);
+router.get('/account/wallet/karma', wallet.karma);
 
 /**
  * PvP
