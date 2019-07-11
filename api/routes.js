@@ -3,6 +3,7 @@ const router = express.Router();
 const account = require('./account');
 const masteryPoints = require('./account/mastery-points');
 const wallet = require('./account/wallet');
+const wvwStats = require('./wvw/stats');
 const pvpStats = require('./pvp/stats');
 
 router.get('/', (req, res) => {
@@ -34,5 +35,10 @@ router.get('/account/wallet/badges-of-honor', wallet.badgesOfHonor);
  * PvP
  */
 router.get('/pvp/stats/rank', pvpStats.rank);
+
+/**
+ * WvW
+ */
+router.get('/wvw/stats/kills', wvwStats.kills);
 
 module.exports = router;
