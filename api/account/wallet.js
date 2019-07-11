@@ -55,3 +55,13 @@ exports.gems = (req, res) => {
       res.end("Couldn't load the account's gems.");
     });
 };
+
+exports.badgesOfHonor = (req, res) => {
+  getCurrencyInWallet(15, req.query.token)
+    .then(currency => {
+      res.end(currency.toLocaleString());
+    })
+    .catch(error => {
+      res.end("Couldn't load the account's badges of honor.");
+    });
+};
