@@ -1,10 +1,6 @@
 const api = require("../helpers/api");
 
 exports.name = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()
@@ -18,10 +14,6 @@ exports.name = (req, res) => {
 };
 
 exports.server = async (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api.authenticate(req.query.token);
 
   try {
@@ -34,10 +26,6 @@ exports.server = async (req, res) => {
 };
 
 exports.fractalLevel = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()

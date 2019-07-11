@@ -4,8 +4,16 @@ const port = process.env.PORT || 3000;
 const routes = require("./api/routes");
 
 // Set Content-Type to 'text/plain'
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.header("Content-Type", "text/plain");
+  next();
+});
+
+app.use((req, res, next) => {
+  if (!req.query.token) {
+    res.end("No API token provided.");
+  }
+
   next();
 });
 

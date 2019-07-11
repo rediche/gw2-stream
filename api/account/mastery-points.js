@@ -1,10 +1,6 @@
 const api = require("../../helpers/api");
 
 exports.total = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()
@@ -24,10 +20,6 @@ exports.total = (req, res) => {
 };
 
 exports.tyria = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()
@@ -46,10 +38,6 @@ exports.tyria = (req, res) => {
 };
 
 exports.maguuma = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()
@@ -68,10 +56,6 @@ exports.maguuma = (req, res) => {
 };
 
 exports.desert = (req, res) => {
-  if (!req.query.token) {
-    res.end("No API token provided.");
-  }
-
   api
     .authenticate(req.query.token)
     .account()
