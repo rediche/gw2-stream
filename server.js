@@ -12,7 +12,7 @@ app.use((req, res, next) => {
 // Always check if a token is passed.
 // TODO: Might need to be changed to only have some endpoints require a token.
 app.use((req, res, next) => {
-  if (!req.query.token) {
+  if (req.path !== "/" && !req.query.token) {
     res.end("No API token provided.");
   }
 

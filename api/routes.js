@@ -6,7 +6,7 @@ const wallet = require('./account/wallet');
 const pvpStats = require('./pvp/stats');
 
 router.get('/', (req, res) => {
-  res.end("Nothing here...");
+  res.redirect('https://gw2.ninja/stream');
 });
 
 /**
