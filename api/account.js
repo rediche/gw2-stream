@@ -31,7 +31,7 @@ exports.fractalLevel = (req, res) => {
     .account()
     .get()
     .then(account => {
-      res.end(account.fractal_level.toString());
+      res.end(account.fractal_level.toLocaleString());
     })
     .catch(error => {
       res.end("Couldn't load the fractal level.");
