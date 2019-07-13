@@ -18,52 +18,60 @@ exports.kills = (req, res) => {
 };
 
 exports.matchup = async (req, res) => {
-  api.authenticate(req.query.token);
+  try {
+    api.authenticate(req.query.token);
 
-  // Get accounts worlds
-  const account = await api.account().get();
+    // 1. Get accounts worlds
+    // 2. Get WvW Matches
+    // 3. Get world names
+    const [account, matches, worlds] = await Promise.all([
+      api.account().get(),
+      api
+        .wvw()
+        .matches()
+        .all(),
+      api.worlds().all()
+    ]);
 
-  // Get WvW Matches
-  const matches = await api
-    .wvw()
-    .matches()
-    .all();
+    // Loop through and check if world ID is on either team
+    const match = matches.find(match => {
+      return (
+        match.all_worlds.red.includes(account.world) ||
+        match.all_worlds.blue.includes(account.world) ||
+        match.all_worlds.green.includes(account.world)
+      );
+    });
 
-  // Loop through and check if world ID is on either team
-  const match = matches.find(match => {
-    return (
-      match.all_worlds.red.includes(account.world) ||
-      match.all_worlds.blue.includes(account.world) ||
-      match.all_worlds.green.includes(account.world)
+    // Put all world IDs in the same array
+    const worldsInMatchIDs = [
+      ...match.all_worlds.red,
+      ...match.all_worlds.blue,
+      ...match.all_worlds.green
+    ];
+
+    // Get world names
+    //const worlds = await api.worlds().all();
+    const worldsInMatch = worlds.filter(world =>
+      worldsInMatchIDs.includes(world.id)
     );
-  });
 
-  // Put all world IDs in the same array
-  const worldsInMatchIDs = [
-    ...match.all_worlds.red,
-    ...match.all_worlds.blue,
-    ...match.all_worlds.green
-  ];
+    // Create link world object
+    const sortIntoHostAndLinks = makeSortIntoHostAndLinkedWorlds(
+      worldsInMatch,
+      match
+    );
+    const red = sortIntoHostAndLinks("red");
+    const blue = sortIntoHostAndLinks("blue");
+    const green = sortIntoHostAndLinks("green");
 
-  // Get world names
-  const worlds = await api.worlds().all();
-  const worldsInMatch = worlds.filter(world => worldsInMatchIDs.includes(world.id));
-
-  // Create link world object
-  const sortIntoHostAndLinks = makeSortIntoHostAndLinkedWorlds(
-    worldsInMatch,
-    match
-  );
-  const red = sortIntoHostAndLinks("red");
-  const blue = sortIntoHostAndLinks("blue");
-  const green = sortIntoHostAndLinks("green");
-
-  // Create link world string
-  let matchupString = createWorldString(red) + " vs. ";
-  matchupString += createWorldString(blue) + " vs. ";
-  matchupString += createWorldString(green);
-
-  res.end(matchupString);
+    // Create link world string
+    let matchupString = createWorldString(red) + " vs. ";
+    matchupString += createWorldString(blue) + " vs. ";
+    matchupString += createWorldString(green);
+    res.end(matchupString);
+  } catch (error) {
+    res.end("Could not load matchup data.");
+  }
 };
 
 const makeSortIntoHostAndLinkedWorlds = (worlds, match) => color => {
