@@ -41,6 +41,6 @@ router.get('/pvp/stats/rank', pvpStats.rank);
  * WvW
  */
 router.get('/wvw/stats/kills', wvwStats.kills);
-router.get('/wvw/stats/matchup', wvwStats.matchup);
+router.get(['/wvw/stats/matchup', '/wvw/stats/match'], wvwStats.matchup);
 
 module.exports = router;
