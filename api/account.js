@@ -1,3 +1,4 @@
+const humanizeDuration = require('humanize-duration');
 const api = require("../helpers/api");
 
 exports.name = (req, res) => {
@@ -49,4 +50,18 @@ exports.wvwRank = (req, res) => {
     .catch(error => {
       res.end("Couldn't load the WvW rank.");
     });
+};
+
+exports.age = async (req, res) => {
+  const { age, created } = await api.authenticate(req.query.token).account().get();
+  const ageInMs = age * 1000;
+  const humanizedDuration = humanizeDuration(ageInMs, {
+    units: ['h', 'm']
+  });
+  const createdInMs = new Date().getTime() - new Date(created).getTime();
+  const daysSinceAccountCreation = humanizeDuration(createdInMs, {
+    units: ['d'],
+    maxDecimalPoints: 0
+  });
+  res.end(humanizedDuration + " over the last " + daysSinceAccountCreation + ".");
 };
