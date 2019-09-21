@@ -18,6 +18,7 @@ router.get('/account/name', account.name);
 router.get(['/account/server', '/account/world'], account.server);
 router.get('/account/fractal-level', account.fractalLevel);
 router.get('/account/wvw-rank', account.wvwRank);
+router.get('/account/wvw-rank/missing-xp', account.wvwMissingXP);
 
 // Mastery Points
 router.get('/account/mastery/points', masteryPoints.total);

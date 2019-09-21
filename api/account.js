@@ -1,5 +1,6 @@
 const humanizeDuration = require('humanize-duration');
 const api = require("../helpers/api");
+const WXPMissingTo10K = require("../helpers/wxp-missing-to-10k");
 
 exports.name = (req, res) => {
   api
@@ -51,6 +52,19 @@ exports.wvwRank = (req, res) => {
       res.end("Couldn't load the WvW rank.");
     });
 };
+
+exports.wvwMissingXP = (req, res) => {
+  api
+    .authenticate(req.query.token)
+    .account()
+    .get()
+    .then(account => {
+      res.end(WXPMissingTo10K(account.wvw_rank).toLocaleString());
+    })
+    .catch(error => {
+      res.end("Couldn't load the missing WXP.");
+    });
+}
 
 exports.age = async (req, res) => {
   const { age, created } = await api.authenticate(req.query.token).account().get();

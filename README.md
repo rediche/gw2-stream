@@ -27,6 +27,7 @@ GW2 Stream is a GW2 API to plain text, usually useful for streaming chatbots lik
  
 ### WvW
 - [x] Rank `/account/wvw-rank`
+- [x] Missing XP to rank 10K `/account/wvw-rank/missing-xp`
 - [x] Kills `/wvw/stats/kills`
 - [x] Matchup `/wvw/stats/matchup` or `/wvw/stats/match`
 
