@@ -23,6 +23,7 @@ GW2 Stream is a GW2 API to plain text, usually useful for streaming chatbots lik
 - [x] Laurels `/account/wallet/laurels`
 - [x] Gems `/account/wallet/gems`
 - [x] Badges of Honor `/account/wallet/badges-of-honor`
+- [x] Skirmish Claim Tickets `/account/wallet/skirmish-claim-tickets`
  
 ### WvW
 - [x] Rank `/account/wvw-rank`

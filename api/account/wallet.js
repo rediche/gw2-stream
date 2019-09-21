@@ -65,3 +65,13 @@ exports.badgesOfHonor = (req, res) => {
       res.end("Couldn't load the account's badges of honor.");
     });
 };
+
+exports.skirmishClaimTickets = (req, res) => {
+  getCurrencyInWallet(26, req.query.token)
+    .then(currency => {
+      res.end(currency.toLocaleString());
+    })
+    .catch(error => {
+      res.end("Couldn't load the account's skirmish claim tickets.");
+    });
+};
