@@ -50,7 +50,6 @@ exports.matchup = async (req, res) => {
     ];
 
     // Get world names
-    //const worlds = await api.worlds().all();
     const worldsInMatch = worlds.filter(world =>
       worldsInMatchIDs.includes(world.id)
     );
