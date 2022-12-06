@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/rediche/gw2-stream#readme",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "gw2api-client": "^7.4.1",
     "humanize-duration": "^3.19.0",
     "nodemon": "^1.19.1"
